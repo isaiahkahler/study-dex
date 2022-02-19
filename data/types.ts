@@ -3,7 +3,7 @@ import { ColorValue } from "react-native"
 export interface ClassData {
   name: string,
   id: string,
-  color: ColorValue,
+  color?: ColorValue,
   lessons: LessonData[],
   isPublic: boolean,
   setCategories: string[]

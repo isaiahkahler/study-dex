@@ -1,10 +1,15 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from "react-native"
+import { Dimensions } from 'react-native'
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 export const globalTheme = {
   spacing: 20,
-  grey: '#f5f5f5',
-  darkGrey: '#ddd',
-  accent: '#ffc964',
+  // grey: '#f5f5f5',
+  grey: '#f2f2f6',
+  darkGrey: '#e3e3e8',
+  accent: '#c89eff',
   darkAccent: '#ff881a',
   warningColor: '#cc0f35',
   borderRadius: 10
@@ -15,6 +20,10 @@ export const globalStyles = StyleSheet.create({
     fontSize: 35,
     fontWeight: 'bold',
   },
+  h2: {
+    fontSize: 30,
+    fontWeight: 'bold'
+  },
   p: {
     fontSize: 20
   },
@@ -24,8 +33,13 @@ export const globalStyles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  safeAreaContainer: {
+    backgroundColor: globalTheme.grey
+  },
   scrollContainer: {
-    backgroundColor: '#fff',
+    // backgroundColor: '#fff',
+    backgroundColor: globalTheme.grey,
+    height: '100%'
   },
   scrollContainerContent: {
     alignItems: 'center'
@@ -51,20 +65,21 @@ export const globalStyles = StyleSheet.create({
   circleButton: {
     borderRadius: 100,
     aspectRatio: 1,
-    backgroundColor: globalTheme.grey,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   circleButtonContent: {
-    backgroundColor: globalTheme.darkGrey,
+    backgroundColor: globalTheme.accent,
     padding: 5,
     borderRadius: 100,
     color: globalTheme.accent
   },
   textInput: {
-    backgroundColor: globalTheme.grey,
+    backgroundColor: globalTheme.darkGrey,
     borderRadius: globalTheme.borderRadius,
     marginVertical: globalTheme.spacing,
+    paddingHorizontal: globalTheme.spacing / 2,
+    paddingVertical: globalTheme.spacing / 4
   },
   invalidText: {
     borderColor: globalTheme.warningColor,
@@ -81,5 +96,33 @@ export const globalStyles = StyleSheet.create({
   },
   paddingHorizontal: {
     paddingHorizontal: globalTheme.spacing
+  },
+  maxWidth: {
+    maxWidth: windowWidth <= 1000 ? 500 : 700
+  },
+  shadow: {
+    shadowRadius: globalTheme.spacing / 4,
+    shadowOpacity: 0.2,
+    shadowOffset: {
+      width: 1,
+      height: 1
+    }
+  },
+  card: {
+    borderRadius: globalTheme.borderRadius,
+    marginHorizontal: globalTheme.spacing,
+    marginBottom: globalTheme.spacing,
+    alignSelf: 'stretch'
+  },
+  cardContent: {
+    backgroundColor: '#fff',
+    borderRadius: globalTheme.borderRadius,
+    paddingHorizontal: globalTheme.spacing,
+    paddingVertical: globalTheme.spacing / 2,
+    flexGrow: 1
+  },
+  cardContentContainer: {
+    display: 'flex',
+    flexDirection: 'row'
   }
 });

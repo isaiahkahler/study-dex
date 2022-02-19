@@ -24,7 +24,7 @@ export default function LoginUI({ onPhoneNumber, onAnonymous }: LoginUIProps) {
       Keyboard.dismiss();
     }}>
       <View style={{ top: -50 }}>
-        <Text style={[globalStyles.h1, { textAlign: 'center' }]}>Welcome to Study Index</Text>
+        <Text style={[globalStyles.h1, { textAlign: 'center' }]}>Welcome to Study Dex</Text>
         <Text style={[globalStyles.p, { textAlign: 'center' }]}>Enter your phone number to get started.</Text>
       </View>
       <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', }} onTouchEnd={(event) => {
@@ -57,15 +57,17 @@ export default function LoginUI({ onPhoneNumber, onAnonymous }: LoginUIProps) {
             }
           ]}
           value={number}
-          onChangeText={(text) => setNumber(text)}
+          onChangeText={(text) => setNumber(text.replace(/\D/g, ""))}
           textContentType="telephoneNumber"
           keyboardType="number-pad"
+          maxLength={12}
+          // onKeyPress={(event) => !/[0-9]/.test(event.nativeEvent.key) ? event.preventDefault() : console.log(event.nativeEvent.key)}
         />
       </View>
       <If value={invalidPhone}>
         <Text style={[globalStyles.p, { alignItems: 'center', color: globalTheme.warningColor, marginBottom: globalTheme.spacing }]}>Please enter a valid phone number.</Text>
       </If>
-      <View style={{ justifyContent: 'center', alignItems: 'center', width: '100%', padding: globalTheme.spacing }}>
+      <View style={[globalStyles.maxWidth, { justifyContent: 'center', alignItems: 'center', width: '100%', padding: globalTheme.spacing }]}>
         <TouchableHighlight style={globalStyles.button} onPress={() => {
           setSubmitted(true);
           if (invalidForm) return;
@@ -80,7 +82,7 @@ export default function LoginUI({ onPhoneNumber, onAnonymous }: LoginUIProps) {
           Alert.alert('Continue Without an Account?', 'You won\'t be able to access your classes and sets on a different device, but you can always sign up later.', [
             {
               text: 'Go Back',
-              onPress: () => {},
+              onPress: () => { },
               style: 'cancel',
             },
             { text: 'Continue', onPress: () => onAnonymous() },
