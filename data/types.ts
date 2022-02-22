@@ -3,10 +3,12 @@ import { ColorValue } from "react-native"
 export interface ClassData {
   name: string,
   id: string,
-  color?: ColorValue,
+  color?: string,
   lessons: LessonData[],
   isPublic: boolean,
-  setCategories: string[]
+  setCategories: string[],
+  order: number,
+  school?: string
 }
 
 export interface LessonData {

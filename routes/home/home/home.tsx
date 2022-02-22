@@ -41,11 +41,23 @@ export default function HomeUI({ classes, handleClassClick }: HomeUIProps) {
       {/* {classes.map(_classData => <ClassDisplay key={_classData.id} classData={_classData} onPress={() => handleClassClick(_classData)} />)} */}
 
       <FlatList style={[
-        { height: '100%', paddingTop: globalTheme.spacing * 3 },
-        searchBarOffset ? { paddingTop: searchBarOffset + globalTheme.spacing, display: 'flex' } : { display: 'none' }
-      ]} data={classes} renderItem={(_class) => <ClassDisplay classData={_class.item} onPress={() => handleClassClick(_class.item)} />} />
+        {
+          height: '100%',
+        },
+        
+      ]}
+        data={classes}
+        renderItem={(_class) => <ClassDisplay classData={_class.item} onPress={() => handleClassClick(_class.item)} />}
+        ListHeaderComponent={<View />} 
+        ListHeaderComponentStyle={searchBarOffset ? { paddingTop: searchBarOffset + globalTheme.spacing } : undefined}
+      >
 
-      {classes.length === 0 && <Text style={[globalStyles.p, { textAlign: 'center' }]}>To create a class, click the + button.</Text>}
+
+      </FlatList>
+
+      {classes.length === 0 && <View style={{ position: 'absolute', width: '100%', height: '100%', flex: 1, justifyContent: 'center' }}>
+        <Text style={[globalStyles.p, { textAlign: 'center' }]}>To create a class, click the + button.</Text>
+      </View>}
 
 
     </View>

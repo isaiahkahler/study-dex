@@ -9,11 +9,6 @@ export function ClassUI({ data }: { data: ClassData }) {
 
   const [display, setDisplay] = useState(0);
 
-  
-
-  console.log('selected index:', display)
-  console.log('lessons:', data.lessons)
-
   return (<ScrollView style={globalStyles.scrollContainer} contentContainerStyle={globalStyles.scrollContainerContent}>
     <View style={[globalStyles.marginVertical, globalStyles.maxWidth, { width: '100%' }]}>
       <TextInput style={[

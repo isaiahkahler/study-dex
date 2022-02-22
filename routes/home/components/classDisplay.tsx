@@ -1,5 +1,7 @@
+import { LinearGradient } from "expo-linear-gradient"
 import { StyleSheet, Text, TouchableHighlight, View } from "react-native"
 import { globalStyles, globalTheme } from "../../../components/styles/globalStyles"
+import { Chip } from "../../../components/ui/chip"
 import { ClassData } from "../../../data/types"
 
 interface ClassDisplayProps {
@@ -8,17 +10,26 @@ interface ClassDisplayProps {
 }
 
 export function ClassDisplay({ classData, onPress }: ClassDisplayProps) {
+  console.log('class color:', classData.color)
   return (
     <TouchableHighlight style={[
       styles.card,
       globalStyles.shadow,
-      classData.color ? { backgroundColor: classData.color } : undefined
     ]}
       onPress={onPress}
     >
-      <View style={styles.cardContentContainer}>
-        <View style={styles.cardContent}>
+      <View style={[
+        styles.cardContentContainer,
+        classData.color ? { backgroundColor: classData.color } : { backgroundColor: globalTheme.darkGrey }
+      ]}>
+        <View style={[
+          styles.cardContent,
+          {backgroundColor:'rgba(255,255,255,0.4)'}
+        ]} >
           <Text style={globalStyles.h2}>{classData.name}</Text>
+          <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+            {classData.setCategories.map((category, index) => <Chip key={category} index={index} text={category} onPress={() => {}} />)}
+          </View>
         </View>
       </View>
     </TouchableHighlight>
@@ -30,7 +41,7 @@ const styles = StyleSheet.create({
     borderRadius: globalTheme.borderRadius,
     marginHorizontal: globalTheme.spacing,
     marginBottom: globalTheme.spacing,
-    alignSelf: 'stretch'
+    alignSelf: 'stretch',
   },
   cardContent: {
     backgroundColor: '#fff',
@@ -41,6 +52,7 @@ const styles = StyleSheet.create({
   },
   cardContentContainer: {
     display: 'flex',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    borderRadius: globalTheme.borderRadius,
   }
 })

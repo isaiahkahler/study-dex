@@ -6,9 +6,61 @@ import { useLayoutEffect } from 'react'
 import { LinearGradient } from 'expo-linear-gradient'
 import { HomeProps } from '..'
 import { ClassData } from '../../../data/types'
+import { useStore } from '../../../data/store'
+
+const testingClasses = [
+  {
+    id: 'test',
+    isPublic: true,
+    lessons: [
+      {
+        id: 'fdsfds',
+        name: 'L18',
+        order: 0,
+        sets: [
+          {
+            id: 'jnennk',
+            body: 'body of a set',
+            category: 'grammar',
+            name: 'Set Title',
+            order: 0,
+            relatedIDs: []
+          }
+        ]
+      },
+      {
+        id: 'fds3d',
+        name: 'L17',
+        order: 0,
+        sets: [
+          {
+            id: 'cdsjjc',
+            body: 'body of a set 2',
+            category: 'grammar',
+            name: 'Set Title 2',
+            order: 0,
+            relatedIDs: []
+          }
+        ]
+      },
+    ],
+    name: "ASIANLAN 226",
+    setCategories: ['grammar', 'vocab', 'kanji', 'random', 'dog', 'honey', 'toes', 'sweat', 'water', 'word', 'plant', 'jeans', 'snow', 'tampon', 'greg', 'no', 'sure'],
+    color: "#e579f6"
+  },
+  { id: 'test2', isPublic: true, lessons: [], name: "EECS 376 - Foundations of Computer Science", setCategories: [] },
+  { id: 'test3', isPublic: true, lessons: [], name: "EECS 376", setCategories: [] },
+  { id: 'test4', isPublic: true, lessons: [], name: "Big thicc Class", setCategories: [] },
+  { id: 'test5', isPublic: true, lessons: [], name: "AMCULT 214 - APIA", setCategories: [] },
+  { id: 'test6', isPublic: true, lessons: [], name: "yassss", setCategories: [] }
+];
 
 
 export function HomeContainer({ navigation, route }: HomeProps) {
+  const user = useStore(state => state.user);
+
+  const classes = useStore(state => state.classes);
+  const localClasses = useStore(state => state.localClasses);
 
   const handleClassClick = (classData: ClassData) => {
     navigation.push('Class', { data: classData });
@@ -20,52 +72,18 @@ export function HomeContainer({ navigation, route }: HomeProps) {
     });
   }, [navigation]);
 
+  // todo: add an error view or something
+  if (!user) return <View />;
+
   return (
     <SafeAreaView style={globalStyles.safeAreaContainer}>
-      <HomeUI handleClassClick={handleClassClick} classes={[
-        {
-          id: 'test', isPublic: true, lessons: [
-            {
-              id: 'fdsfds',
-              name: 'L18',
-              order: 0,
-              sets: [
-                {
-                  id: 'jnennk',
-                  body: 'body of a set',
-                  category: 'grammar',
-                  name: 'Set Title',
-                  order: 0,
-                  relatedIDs: []
-                }
-              ]
-            },
-            {
-              id: 'fds3d',
-              name: 'L17',
-              order: 0,
-              sets: [
-                {
-                  id: 'cdsjjc',
-                  body: 'body of a set 2',
-                  category: 'grammar',
-                  name: 'Set Title 2',
-                  order: 0,
-                  relatedIDs: []
-                }
-              ]
-            },
-          ], name: "ASIANLAN 226", setCategories: ['grammar', 'vocab', 'kanji']
-        },
-        { id: 'test2', isPublic: true, lessons: [], name: "EECS 376 - Foundations of Computer Science", setCategories: [] },
-        { id: 'test3', isPublic: true, lessons: [], name: "EECS 376", setCategories: [] },
-        { id: 'test4', isPublic: true, lessons: [], name: "Big thicc Class", setCategories: [] },
-        { id: 'test5', isPublic: true, lessons: [], name: "AMCULT 214 - APIA", setCategories: [] },
-        { id: 'test6', isPublic: true, lessons: [], name: "yassss", setCategories: [] }
-      ]} />
+      <HomeUI
+        handleClassClick={handleClassClick}
+        classes={user.isAnonymous ? localClasses : classes === null ? [] : classes}
+      />
       <View style={{ flex: 1 }}>
         <LinearGradient colors={['rgba(242,242,246,0)', 'rgba(242,242,246,1)']} style={{ height: globalTheme.spacing, position: 'absolute', bottom: 0, width: '100%', left: -globalTheme.spacing }} />
-        <FloatingCreateButton onPress={() => { }} />
+        <FloatingCreateButton onPress={() => { navigation.navigate('CreateClass') }} />
       </View>
     </ SafeAreaView>
   )

@@ -9,6 +9,7 @@ export const globalTheme = {
   // grey: '#f5f5f5',
   grey: '#f2f2f6',
   darkGrey: '#e3e3e8',
+  darkerGrey: '#aaaaaa',
   accent: '#c89eff',
   darkAccent: '#ff881a',
   warningColor: '#cc0f35',
@@ -64,7 +65,7 @@ export const globalStyles = StyleSheet.create({
   },
   circleButton: {
     borderRadius: 100,
-    aspectRatio: 1,
+    // aspectRatio: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -126,3 +127,4 @@ export const globalStyles = StyleSheet.create({
     flexDirection: 'row'
   }
 });
+
