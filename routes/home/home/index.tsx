@@ -62,43 +62,33 @@ export function HomeContainer({ navigation, route }: HomeProps) {
   const classes = useStore(state => state.classes);
   const localClasses = useStore(state => state.localClasses);
 
-  const handleClassClick = (classData: ClassData) => {
-    navigation.push('Class', { data: classData });
-  }
-
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => <HeaderProfileButton onPress={() => navigation.navigate('Profile')} />
     });
   }, [navigation]);
 
+
+  const handleClassClick = (classData: ClassData) => {
+    navigation.push('Class', { data: classData });
+  }
+
+  const handleCreateClassClick = () => {
+    navigation.navigate('CreateClass');
+  };
+  const handleCreateSetClick = () => {};
+
   // todo: add an error view or something
   if (!user) return <View />;
 
   return (
-    <SafeAreaView style={globalStyles.safeAreaContainer}>
       <HomeUI
+        handleCreateClassClick={handleCreateClassClick}
+        handleCreateSetClick={handleCreateSetClick}
         handleClassClick={handleClassClick}
         classes={user.isAnonymous ? localClasses : classes === null ? [] : classes}
       />
-      <View style={{ flex: 1 }}>
-        <LinearGradient colors={['rgba(242,242,246,0)', 'rgba(242,242,246,1)']} style={{ height: globalTheme.spacing, position: 'absolute', bottom: 0, width: '100%', left: -globalTheme.spacing }} />
-        <FloatingCreateButton onPress={() => { navigation.navigate('CreateClass') }} />
-      </View>
-    </ SafeAreaView>
   )
-}
-
-function FloatingCreateButton({ onPress }: { onPress: () => void }) {
-  return (
-    <TouchableHighlight style={[globalStyles.circleButton, globalStyles.shadow, { position: 'absolute', bottom: globalTheme.spacing, right: globalTheme.spacing }]} onPress={() => onPress()}>
-      <View style={globalStyles.circleButtonContent}>
-        <Svg width={50} height={50} viewBox='0 0 24 24'>
-          <Path fill='#000' d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
-        </Svg>
-      </View>
-    </TouchableHighlight>
-  );
 }
 
 

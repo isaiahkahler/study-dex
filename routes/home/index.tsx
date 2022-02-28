@@ -29,12 +29,11 @@ export function Home() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName='Home'>
-        <Stack.Screen name="Home" options={{ headerTitle: 'Your Classes', headerLargeTitle: true }} component={HomeContainer} />
+        <Stack.Screen name="Home" options={{ headerTitle: 'All Courses', headerLargeTitle: true }} component={HomeContainer} />
         <Stack.Screen name="Profile" component={Profile} />
         <Stack.Screen name="Class" component={ClassScreen} />
         <Stack.Screen name="CreateClass" component={CreateClass} />
       </Stack.Navigator>
-
     </NavigationContainer>
   );
 }

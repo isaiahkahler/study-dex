@@ -10,7 +10,7 @@ export const globalTheme = {
   grey: '#f2f2f6',
   darkGrey: '#e3e3e8',
   darkerGrey: '#aaaaaa',
-  accent: '#c89eff',
+  accent: '#28f3b5',
   darkAccent: '#ff881a',
   warningColor: '#cc0f35',
   borderRadius: 10
@@ -27,6 +27,9 @@ export const globalStyles = StyleSheet.create({
   },
   p: {
     fontSize: 20
+  },
+  smallP: {
+    fontSize: 15
   },
   container: {
     flex: 1,
@@ -56,12 +59,12 @@ export const globalStyles = StyleSheet.create({
   buttonContent: {
     backgroundColor: globalTheme.accent,
     padding: 7.5,
-    borderRadius: globalTheme.borderRadius
+    borderRadius: globalTheme.borderRadius,
   },
   buttonText: {
     fontSize: 20,
     fontWeight: 'bold',
-    textAlign: 'center'
+    textAlign: 'center',
   },
   circleButton: {
     borderRadius: 100,
@@ -78,7 +81,8 @@ export const globalStyles = StyleSheet.create({
   textInput: {
     backgroundColor: globalTheme.darkGrey,
     borderRadius: globalTheme.borderRadius,
-    marginVertical: globalTheme.spacing,
+    marginTop: globalTheme.spacing / 4,
+    marginBottom: globalTheme.spacing,
     paddingHorizontal: globalTheme.spacing / 2,
     paddingVertical: globalTheme.spacing / 4
   },

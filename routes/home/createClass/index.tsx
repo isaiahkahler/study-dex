@@ -21,9 +21,7 @@ export function CreateClass({ navigation, route }: CreateClassProps) {
 
   useLayoutEffect(() => {
     if (!editMode) {
-      navigation.setOptions({
-        headerTitle: 'Create a new course'
-      })
+      navigation.setOptions({ headerTitle: 'Create a new course' })
       return;
     }
     if (!initialData) return;
@@ -72,9 +70,7 @@ export function CreateClass({ navigation, route }: CreateClassProps) {
   if (!user) return <View />;
 
   return (
-    <SafeAreaView style={globalStyles.safeAreaContainer}>
-      <CreateClassUI user={user} onSubmit={handleSubmit} initialData={initialData} editMode={editMode} />
-    </SafeAreaView>
+    <CreateClassUI user={user} onSubmit={handleSubmit} initialData={initialData} editMode={editMode} />
   )
 
 }
