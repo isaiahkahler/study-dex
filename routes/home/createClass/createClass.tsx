@@ -7,7 +7,7 @@ import { getColor, getDarkColor, getLightColor } from "../../../components/style
 import { globalStyles, globalTheme } from "../../../components/styles/globalStyles"
 import { Chip } from "../../../components/ui/chip"
 import { ClassData } from "../../../data/types"
-import { AvoidKeyboardFloating, AvoidKeyboardScrollLayout } from "../../../components/ui/avoidKeyboardScoll"
+import { AvoidKeyboardFloating, AvoidKeyboardScrollLayout } from "../../../components/ui/avoidKeyboard"
 import { SafeAreaView } from "react-native-safe-area-context";
 
 interface CreateClassUIProps {

@@ -10,7 +10,7 @@ export const globalTheme = {
   grey: '#f2f2f6',
   darkGrey: '#e3e3e8',
   darkerGrey: '#aaaaaa',
-  accent: '#28f3b5',
+  accent: '#ffc964',
   darkAccent: '#ff881a',
   warningColor: '#cc0f35',
   borderRadius: 10

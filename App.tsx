@@ -7,6 +7,7 @@ import { Home } from './routes/home';
 import { Login } from './routes/login';
 import firebase from './data/firebase'
 import { SplashScreen } from './components/ui/splash';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 
 export default function App() {
@@ -52,5 +53,5 @@ export default function App() {
     <Login />
   );
 
-  return <Home />
+  return <SafeAreaProvider ><Home /></SafeAreaProvider>
 }
