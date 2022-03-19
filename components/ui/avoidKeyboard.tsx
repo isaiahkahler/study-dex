@@ -1,4 +1,4 @@
-import { KeyboardAvoidingView, ScrollView, View } from "react-native"
+import { FlexAlignType, KeyboardAvoidingView, ScrollView, View } from "react-native"
 import { useHeaderHeight } from '@react-navigation/elements'
 import { globalStyles } from "../styles/globalStyles"
 import { ReactNode } from "react";
@@ -22,7 +22,7 @@ export function AvoidKeyboardScrollLayout({ children, bottomOffset }: AvoidKeybo
       keyboardVerticalOffset={headerHeight}
     >
       <ScrollView style={globalStyles.scrollContainer} contentContainerStyle={globalStyles.scrollContainerContent}>
-        <View style={[globalStyles.paddingHorizontal, globalStyles.paddingVertical, { width: '100%', paddingBottom: (bottomOffset || undefined)  }]}>
+        <View style={[globalStyles.paddingHorizontal, globalStyles.paddingVertical, { width: '100%', paddingBottom: (bottomOffset || undefined) }]}>
           {children}
         </View>
       </ScrollView>
@@ -34,10 +34,11 @@ export function AvoidKeyboardScrollLayout({ children, bottomOffset }: AvoidKeybo
 interface AvoidKeyboardFloatingProps {
   children: ReactNode,
   bottomOffset?: number,
-  giveHeight?: (offset: number) => void
+  giveHeight?: (offset: number) => void,
+  align?: FlexAlignType,
 }
 
-export function AvoidKeyboardFloating({ children, bottomOffset, giveHeight }: AvoidKeyboardFloatingProps) {
+export function AvoidKeyboardFloating({ children, bottomOffset, giveHeight, align }: AvoidKeyboardFloatingProps) {
 
   const headerHeight = useHeaderHeight();
 
@@ -54,7 +55,7 @@ export function AvoidKeyboardFloating({ children, bottomOffset, giveHeight }: Av
         keyboardVerticalOffset={headerHeight + (bottomOffset || 0)}
         pointerEvents='box-none'
       >
-        <View style={{ alignItems: 'center' }} pointerEvents={'box-none'}>
+        <View style={{ alignItems: align ? align : 'center' }} pointerEvents={'box-none'}>
           <View pointerEvents='auto' onLayout={(event) => { giveHeight && giveHeight(event.nativeEvent.layout.height + (bottomOffset || 0)) }}>
             {children}
           </View>
