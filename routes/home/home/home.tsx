@@ -61,7 +61,7 @@ export default function HomeUI({ classes, handleClassClick, handleCreateClassCli
 
       <AvoidKeyboardFloating align="flex-end">
 
-        <View style={{ marginRight: globalTheme.spacing }} pointerEvents='none'>
+        <View style={{ marginRight: globalTheme.spacing }}>
           <FloatingCreateButton onPress={handleCreateClassClick} />
         </View>
 
