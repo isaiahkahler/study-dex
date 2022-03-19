@@ -1,10 +1,10 @@
 import { getAuth } from "firebase/auth"
-import { FlatList, KeyboardAvoidingView, ScrollView, Text, TextInput, TouchableHighlight, View } from "react-native"
+import { Animated, FlatList, KeyboardAvoidingView, ScrollView, StyleSheet, Text, TextInput, TouchableHighlight, View } from "react-native"
 import { globalStyles, globalTheme } from "../../../components/styles/globalStyles"
 import { useHeaderHeight } from '@react-navigation/elements'
 import { ClassDisplay } from "../components/classDisplay";
 import { ClassData } from "../../../data/types";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { LinearGradient } from 'expo-linear-gradient'
 import Svg, { Path } from 'react-native-svg'
 import { AvoidKeyboardFloating, AvoidKeyboardScrollLayout } from "../../../components/ui/avoidKeyboard";
@@ -17,11 +17,73 @@ interface HomeUIProps {
   handleCreateSetClick: () => void
 }
 
+const styles = StyleSheet.create({
+  floatingMenuButtonContainer: {
+    position: 'absolute',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  floatingMenuButtonText: {
+    position: 'absolute', 
+    right: '100%', 
+    marginRight: globalTheme.spacing / 2
+  }
+})
+
 export default function HomeUI({ classes, handleClassClick, handleCreateClassClick, handleCreateSetClick }: HomeUIProps) {
   const auth = getAuth();
   const headerHeight = useHeaderHeight();
   const inputContainerRef = useRef<View>(null);
   const [searchBarOffset, setSearchBarOffset] = useState<number | null>(null);
+
+  const [createMenuOpen, setCreateMenuOpen] = useState(false);
+
+  const rotateAnimation = useRef(new Animated.Value(0)).current;
+
+
+  const rotation = {
+    transform: [
+      {
+        rotate: rotateAnimation.interpolate({
+          inputRange: [0, 1],
+          outputRange: ['0deg', '45deg']
+        })
+      }
+    ]
+  };
+
+  const lowerYTranslation = {
+    transform: [
+      { scale: rotateAnimation }, {
+        translateY: rotateAnimation.interpolate({
+          inputRange: [0, 1],
+          outputRange: [0, -80]
+        })
+      }
+    ]
+  };
+  const upperYTranslation = {
+    transform: [
+      { scale: rotateAnimation }, {
+        translateY: rotateAnimation.interpolate({
+          inputRange: [0, 1],
+          outputRange: [0, -140]
+        })
+      }
+    ]
+  };
+
+  const toggleCreateButton = () => {
+    const toValue = createMenuOpen ? 0 : 1;
+    Animated.spring(rotateAnimation, {
+      toValue,
+      friction: 5,
+      useNativeDriver: true,
+    }).start();
+
+    setCreateMenuOpen(!createMenuOpen);
+  };
 
   return (
     <SafeAreaView style={[globalStyles.safeAreaContainer, { flex: 1, marginTop: headerHeight }]} edges={['top', 'left', 'right']}>
@@ -61,8 +123,21 @@ export default function HomeUI({ classes, handleClassClick, handleCreateClassCli
 
       <AvoidKeyboardFloating align="flex-end">
 
-        <View style={{ marginRight: globalTheme.spacing }}>
-          <FloatingCreateButton onPress={handleCreateClassClick} />
+        <View style={{ marginRight: globalTheme.spacing, justifyContent: 'center', alignItems: 'center' }}>
+          <Animated.View style={[styles.floatingMenuButtonContainer, upperYTranslation]}>
+            <Text style={[globalStyles.buttonText, styles.floatingMenuButtonText]}>create new set</Text>
+            <PopUpAddSetButton onPress={() => { }} />
+          </Animated.View>
+
+          <Animated.View style={[styles.floatingMenuButtonContainer, lowerYTranslation]}>
+            <Text style={[globalStyles.buttonText, styles.floatingMenuButtonText]}>create new course</Text>
+            <PopUpCreateCourseButton onPress={() => { }} />
+          </Animated.View>
+
+          <Animated.View style={[rotation]}>
+            {/* <FloatingCreateButton onPress={handleCreateClassClick} /> */}
+            <FloatingCreateButton onPress={toggleCreateButton} />
+          </Animated.View>
         </View>
 
       </AvoidKeyboardFloating>
@@ -76,6 +151,31 @@ function FloatingCreateButton({ onPress }: { onPress: () => void }) {
     <TouchableHighlight style={[globalStyles.circleButton, globalStyles.shadow]} onPress={() => onPress()}>
       <View style={globalStyles.circleButtonContent}>
         <Svg width={50} height={50} viewBox='0 0 24 24'>
+          <Path fill='#000' d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+        </Svg>
+      </View>
+    </TouchableHighlight>
+  );
+}
+
+
+function PopUpAddSetButton({ onPress }: { onPress: () => void }) {
+  return (
+    <TouchableHighlight style={[globalStyles.circleButton, globalStyles.shadow]} onPress={() => onPress()}>
+      <View style={[globalStyles.circleButtonContent, {backgroundColor: "#00ff00"}]}>
+        <Svg width={40} height={40} viewBox='0 0 24 24'>
+          <Path fill='#000' d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+        </Svg>
+      </View>
+    </TouchableHighlight>
+  );
+}
+
+function PopUpCreateCourseButton({ onPress }: { onPress: () => void }) {
+  return (
+    <TouchableHighlight style={[globalStyles.circleButton, globalStyles.shadow]} onPress={() => onPress()}>
+      <View style={[globalStyles.circleButtonContent, {backgroundColor: "#0000ff"}]}>
+        <Svg width={40} height={40} viewBox='0 0 24 24'>
           <Path fill='#000' d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
         </Svg>
       </View>
