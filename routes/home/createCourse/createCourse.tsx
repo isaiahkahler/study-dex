@@ -4,7 +4,7 @@ import { Controller, useController, useForm } from "react-hook-form"
 import { Switch, Text, TextInput, TouchableHighlight, View } from "react-native"
 import Svg, { Path } from "react-native-svg"
 import { getColor, getDarkColor, getLightColor } from "../../../components/styles/colors"
-import { globalStyles, globalTheme } from "../../../components/styles/globalStyles"
+import { useStyles, useTheme } from "../../../components/styles/globalStyles"
 import { Chip } from "../../../components/ui/chip"
 import { ClassData } from "../../../data/types"
 import { AvoidKeyboardFloating, AvoidKeyboardScrollLayout } from "../../../components/ui/avoidKeyboard"
@@ -27,6 +27,8 @@ export interface CreateClassInputs {
 
 export function CreateClassUI({ user, onSubmit, initialData, editMode }: CreateClassUIProps) {
 
+  const globalTheme = useTheme();
+  const globalStyles = useStyles(globalTheme);
   const [categories, setCategories] = useState<string[]>(initialData ? initialData.setCategories : []);
   const [categoryInput, setCategoryInput] = useState('');
 
@@ -217,6 +219,9 @@ export function CreateClassUI({ user, onSubmit, initialData, editMode }: CreateC
 
 
 export function CreateButton({ isEnabled, onPress, children }: PropsWithChildren<{ isEnabled: boolean, onPress: () => void }>) {
+  
+  const globalTheme = useTheme();
+  const globalStyles = useStyles(globalTheme);
   const textColor = isEnabled ? '#000' : '#aaaaaa';
   return (
     <TouchableHighlight

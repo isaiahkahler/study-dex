@@ -1,6 +1,6 @@
 import { LinearGradient } from "expo-linear-gradient"
 import { StyleSheet, Text, TouchableHighlight, View } from "react-native"
-import { globalStyles, globalTheme } from "../../../components/styles/globalStyles"
+import { GlobalTheme, useStyles, useTheme } from "../../../components/styles/globalStyles"
 import { Chip } from "../../../components/ui/chip"
 import { ClassData } from "../../../data/types"
 
@@ -10,6 +10,10 @@ interface ClassDisplayProps {
 }
 
 export function ClassDisplay({ classData, onPress }: ClassDisplayProps) {
+  const globalTheme = useTheme();
+  const globalStyles = useStyles(globalTheme);
+  const styles = makeStyles(globalTheme);
+
   console.log('class color:', classData.color)
   return (
     <TouchableHighlight style={[
@@ -36,7 +40,7 @@ export function ClassDisplay({ classData, onPress }: ClassDisplayProps) {
   )
 }
 
-const styles = StyleSheet.create({
+const makeStyles = (globalTheme: GlobalTheme) => StyleSheet.create({
   card: {
     borderRadius: globalTheme.borderRadius,
     marginHorizontal: globalTheme.spacing,

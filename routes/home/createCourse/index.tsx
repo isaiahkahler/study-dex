@@ -4,11 +4,11 @@ import { Text, TouchableHighlight, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { uid } from "uid";
 import { CreateClassProps } from "..";
-import { globalStyles, globalTheme } from "../../../components/styles/globalStyles";
+import { useTheme } from "../../../components/styles/globalStyles";
 import { db } from "../../../data/firebase";
 import { useStore } from "../../../data/store";
 import { ClassData } from "../../../data/types";
-import { CreateClassInputs, CreateClassUI } from "./createClass";
+import { CreateClassInputs, CreateClassUI } from "./createCourse";
 
 export function CreateClass({ navigation, route }: CreateClassProps) {
 
@@ -18,6 +18,7 @@ export function CreateClass({ navigation, route }: CreateClassProps) {
   const initialData = route.params?.initialData;
   const editMode = route.params?.editMode;
   const classes = useStore(state => state.classes);
+  const globalTheme = useTheme();
 
   useLayoutEffect(() => {
     if (!editMode) {

@@ -3,10 +3,12 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import type { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { Profile } from './profile'
-import { ClassScreen } from './class'
+import { ClassScreen } from './course'
 import { ClassData } from '../../data/types'
-import { CreateClass } from './createClass'
-import { CreateClassInputs } from './createClass/createClass'
+import { CreateClass } from './createCourse'
+import { CreateClassInputs } from './createCourse/createCourse'
+import { useColorScheme } from 'react-native'
+import { useTheme } from '../../components/styles/globalStyles'
 
 
 type HomeStackParamList = {
@@ -26,8 +28,18 @@ export type CreateClassProps = NativeStackScreenProps<HomeStackParamList, 'Creat
 const Stack = createNativeStackNavigator<HomeStackParamList>();
 
 export function Home() {
+  const colorScheme = useColorScheme();
+  const theme = useTheme();
+
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={{dark: colorScheme === 'dark', colors: {
+      primary: theme.accent,
+      background: theme.baseColor,
+      border: 'none',
+      card: colorScheme === 'light' ? "#fff" : '#5a5a5c',
+      notification: 'none',
+      text: theme.textColor
+    }}}>
       <Stack.Navigator initialRouteName='Home'>
         <Stack.Screen name="Home" options={{ headerTitle: 'All Courses', headerLargeTitle: true }} component={HomeContainer} />
         <Stack.Screen name="Profile" component={Profile} />

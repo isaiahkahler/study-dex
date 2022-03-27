@@ -1,5 +1,5 @@
 import { ScrollView, Text, TextInput, TouchableHighlight, View } from "react-native"
-import { globalStyles, globalTheme } from "../../../components/styles/globalStyles"
+import { useStyles, useTheme } from "../../../components/styles/globalStyles"
 import { ClassData } from "../../../data/types"
 import SegmentedControl from '@react-native-segmented-control/segmented-control'
 import { useState } from "react"
@@ -8,6 +8,9 @@ import { useState } from "react"
 export function ClassUI({ data }: { data: ClassData }) {
 
   const [display, setDisplay] = useState(0);
+
+  const globalTheme = useTheme();
+  const globalStyles = useStyles(globalTheme);
 
   return (<ScrollView style={globalStyles.scrollContainer} contentContainerStyle={globalStyles.scrollContainerContent}>
     <View style={[globalStyles.marginVertical, globalStyles.maxWidth, { width: '100%' }]}>

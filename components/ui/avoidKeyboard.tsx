@@ -1,6 +1,6 @@
 import { FlexAlignType, KeyboardAvoidingView, ScrollView, View } from "react-native"
 import { useHeaderHeight } from '@react-navigation/elements'
-import { globalStyles } from "../styles/globalStyles"
+import { useStyles, useTheme } from "../styles/globalStyles"
 import { ReactNode } from "react";
 
 interface AvoidKeyboardScrollLayoutProps {
@@ -11,6 +11,8 @@ interface AvoidKeyboardScrollLayoutProps {
 export function AvoidKeyboardScrollLayout({ children, bottomOffset }: AvoidKeyboardScrollLayoutProps) {
 
   const headerHeight = useHeaderHeight();
+  const globalTheme = useTheme();
+  const globalStyles = useStyles(globalTheme);
 
   return (
     <KeyboardAvoidingView

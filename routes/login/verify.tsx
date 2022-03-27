@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import { Keyboard, StyleSheet, Text, TextInput, View, TouchableHighlight } from "react-native"
 import { VerifyProps } from "."
-import { globalStyles, globalTheme } from "../../components/styles/globalStyles";
+import { useStyles, useTheme } from "../../components/styles/globalStyles";
 import { If } from '../../components/ui/if'
 
 
 export default function VerifyUI({route, navigation}: VerifyProps) {
   const [code, setCode] = useState('')
   const [submitted, setSubmitted] = useState(false)
+  const globalTheme = useTheme();
+  const globalStyles = useStyles(globalTheme);
 
   useEffect(() => {
     console.log('number:', route.params.number);

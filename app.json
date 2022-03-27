@@ -17,16 +17,19 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.isaiahkahler.studydex"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.isaiahkahler.studydex"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "userInterfaceStyle": "automatic"
   }
 }

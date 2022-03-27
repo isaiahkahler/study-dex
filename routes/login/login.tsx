@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Keyboard, StyleSheet, Text, TextInput, View, TouchableHighlight, Alert } from "react-native"
-import { globalStyles, globalTheme } from "../../components/styles/globalStyles"
+import { useStyles, useTheme } from "../../components/styles/globalStyles"
 import { If } from '../../components/ui/if'
 
 interface LoginUIProps {
@@ -15,12 +15,15 @@ export default function LoginUI({ onPhoneNumber, onAnonymous }: LoginUIProps) {
   const [number, setNumber] = useState('')
   const [submitted, setSubmitted] = useState(false)
 
+  const globalTheme = useTheme();
+  const globalStyles = useStyles(globalTheme);
+
   const invalidPhone = submitted && number.length < 10;
   const invalidExtension = submitted && extension.length === 0;
   const invalidForm = invalidPhone || invalidExtension;
 
   return (
-    <View style={styles.container} onTouchEnd={(event) => {
+    <View style={globalStyles.container} onTouchEnd={(event) => {
       Keyboard.dismiss();
     }}>
       <View style={{ top: -50 }}>
@@ -98,13 +101,3 @@ export default function LoginUI({ onPhoneNumber, onAnonymous }: LoginUIProps) {
     </View>
   );
 }
-
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

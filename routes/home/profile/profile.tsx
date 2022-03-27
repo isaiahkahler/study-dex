@@ -1,9 +1,12 @@
 import { getAuth } from "firebase/auth"
 import { Text, TouchableHighlight, View } from "react-native"
-import { globalStyles } from "../../../components/styles/globalStyles"
+import { useStyles, useTheme } from "../../../components/styles/globalStyles"
 
 
 export default function ProfileUI () {
+
+  const globalTheme = useTheme();
+  const globalStyles = useStyles(globalTheme);
 
   const auth = getAuth();
 

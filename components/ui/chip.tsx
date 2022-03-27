@@ -3,7 +3,7 @@ import { PropsWithChildren } from "react";
 import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
 import Svg, { Path } from "react-native-svg";
 import { getColor, getDarkColor, getLightColor } from "../styles/colors";
-import { globalStyles, globalTheme } from "../styles/globalStyles";
+import { useStyles, useTheme } from "../styles/globalStyles";
 
 
 interface ChipProps {
@@ -14,6 +14,8 @@ interface ChipProps {
 }
 
 export function Chip({ index, text, onClose, onPress }: ChipProps) {
+  const globalTheme = useTheme();
+  const globalStyles = useStyles(globalTheme);
   const backgroundColor = getLightColor(index);
   const textColor = getDarkColor(index);
   // console.log(`index ${index} color ${backgroundColor}`)
