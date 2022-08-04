@@ -9,6 +9,7 @@ import { CreateClass } from './createCourse'
 import { CreateClassInputs } from './createCourse/createCourse'
 import { useColorScheme } from 'react-native'
 import { useTheme } from '../../components/styles/globalStyles'
+import { CreateSet } from './createSet'
 
 
 type HomeStackParamList = {
@@ -16,6 +17,7 @@ type HomeStackParamList = {
   Profile: undefined,
   Class: { data: ClassData },
   CreateClass: { initialData?: ClassData, editMode?: boolean } | undefined
+  CreateSet: { initialData?: ClassData, editMode?: boolean } | undefined
   // Verify: { number: string }
 }
 
@@ -24,6 +26,7 @@ export type HomeProps = NativeStackScreenProps<HomeStackParamList, 'Home'>;
 export type ProfileProps = NativeStackScreenProps<HomeStackParamList, 'Profile'>;
 export type ClassProps = NativeStackScreenProps<HomeStackParamList, 'Class'>;
 export type CreateClassProps = NativeStackScreenProps<HomeStackParamList, 'CreateClass'>;
+export type CreateSetProps = NativeStackScreenProps<HomeStackParamList, 'CreateSet'>;
 
 const Stack = createNativeStackNavigator<HomeStackParamList>();
 
@@ -45,6 +48,7 @@ export function Home() {
         <Stack.Screen name="Profile" component={Profile} />
         <Stack.Screen name="Class" component={ClassScreen} />
         <Stack.Screen name="CreateClass" component={CreateClass} />
+        <Stack.Screen name="CreateSet" component={CreateSet} />
       </Stack.Navigator>
     </NavigationContainer>
   );

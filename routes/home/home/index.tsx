@@ -77,7 +77,9 @@ export function HomeContainer({ navigation, route }: HomeProps) {
   const handleCreateClassClick = () => {
     navigation.navigate('CreateClass');
   };
-  const handleCreateSetClick = () => {};
+  const handleCreateSetClick = () => {
+    navigation.navigate('CreateSet')
+  };
 
   // todo: add an error view or something
   if (!user) return <View />;

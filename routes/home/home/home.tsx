@@ -30,11 +30,11 @@ const makeStyles = (globalTheme: any) => StyleSheet.create({
     position: 'absolute',
     right: '100%',
     marginRight: globalTheme.spacing / 2,
-    backgroundColor: "rgba(255,255,255,0.5)",
-    shadowRadius: 10,
+    // backgroundColor: "rgba(255,255,255,0.5)",
+    // shadowRadius: 10,
     // textShadowColor: 'rgba(255,255,255,1)',
-    shadowOpacity: 1,
-    shadowColor: 'rgba(255,255,255,1)',
+    // shadowOpacity: 1,
+    // shadowColor: 'rgba(255,255,255,1)',
   }
 })
 
@@ -84,14 +84,14 @@ export default function HomeUI({ classes, handleClassClick, handleCreateClassCli
       </KeyboardAvoidingView>
 
 
-      <FloatingButtonArea />
+      <FloatingButtonArea handleCreateClassClick={handleCreateClassClick} handleCreateSetClick={handleCreateSetClick} />
 
     </ SafeAreaView>
   );
 }
 
 
-function FloatingButtonArea() {
+function FloatingButtonArea({handleCreateClassClick, handleCreateSetClick} : {handleCreateClassClick: () => void, handleCreateSetClick: () => void}) {
   const buttonAnimation = useRef(new Animated.Value(0)).current;
   const [openState, setOpenState] = useState(false);
   const globalTheme = useTheme();
@@ -149,12 +149,12 @@ function FloatingButtonArea() {
       <View style={{ marginRight: globalTheme.spacing, justifyContent: 'center', alignItems: 'center', zIndex: 200 }}>
         <Animated.View style={[styles.floatingMenuButtonContainer, upperYTranslation]}>
           <Text style={[globalStyles.buttonText, styles.floatingMenuButtonText]}>create new set</Text>
-          <PopUpAddSetButton onPress={() => { }} />
+          <PopUpAddSetButton onPress={handleCreateSetClick} />
         </Animated.View>
 
         <Animated.View style={[styles.floatingMenuButtonContainer, lowerYTranslation]}>
           <Text style={[globalStyles.buttonText, styles.floatingMenuButtonText]}>create new course</Text>
-          <PopUpCreateCourseButton onPress={() => { }} />
+          <PopUpCreateCourseButton onPress={handleCreateClassClick} />
         </Animated.View>
 
         <Animated.View style={[rotation]}>
